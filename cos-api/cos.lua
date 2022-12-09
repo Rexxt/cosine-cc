@@ -71,6 +71,7 @@ function cos.login(username, password)
     end
     cos[cos_idx].connected_user = username
     settings.set("cos_users", cos[cos_idx].users)
+    return true
 end
 
 function cos.getUsername()
