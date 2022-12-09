@@ -74,6 +74,11 @@ function cos.login(username, password)
     return true
 end
 
+function cos.logout()
+    cos[cos_idx].connected_user = nil
+    return true
+end
+
 function cos.getUsername()
     return cos[cos_idx].connected_user
 end
@@ -124,6 +129,9 @@ function cos.removeUser(username)
     end
     if not perms.manage_users then
         error('missing permission "manage_users" for user '..cos.getUsername(), 2)
+    end
+    if username == 'root' then
+        error('cannot delete root user', 2)
     end
     cos[cos_idx].users[username] = nil
     cos[cos_idx].apis.settings.set("cos_users", cos[cos_idx].users)
